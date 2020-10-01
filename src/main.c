@@ -81,7 +81,7 @@ char **write_integrals(struct interval_t interval, unsigned int count, const uns
 			return NULL;
 		}
 
-		if (!sprintf(results[i], "%d\t%.5f \t%.5f", partition_sizes[i], integral_rectangle, integral_simpson)) {
+		if (!sprintf(results[i], "%d %.5f %.5f", partition_sizes[i], integral_rectangle, integral_simpson)) {
 			free_string_array(results, i + 1);
 			error("Cannot write results to string in %d experiment\n", i);
 			return NULL;
@@ -92,8 +92,6 @@ char **write_integrals(struct interval_t interval, unsigned int count, const uns
 }
 
 void print_results(char **results, unsigned int count){
-    if (printf("amount\trectangle\tsimpsons\n") < 0)
-		error("Cannot wtite %d result to stdout");
     for (unsigned int i = 0; i < count; ++i) {
 		if (printf("%s\n", results[i]) < 0) {
 			error("Cannot wtite %d result to stdout", i);
